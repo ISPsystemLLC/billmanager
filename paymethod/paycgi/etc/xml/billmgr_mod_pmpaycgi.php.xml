@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mgrdata>
+  <plugin name="pmpaycgi.php">
+    <group>payment_method</group>
+    <msg name="desc_short" lang="ru">Пример простого модуля оплаты</msg>
+    <msg name="desc_short" lang="en">CGI Payment module example</msg>
+    <msg name="desc_full" lang="ru">Пример простого модуля оплаты</msg>
+    <msg name="desc_full" lang="en">CGI Payment module example</msg>
+    <msg name="price" lang="ru">Бесплатно</msg>
+    <msg name="price" lang="en">Free</msg>
+  </plugin>
+
+  <metadata name="paymethod.edit.paycgi.php" type="form">
+    <form>
+      <page name="methodprops">
+        <field name="secret">
+          <input name="secret" private="yes" required="yes" type="text"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
+
+  <lang name="en">
+    <messages name="label_paymethod">
+      <msg name="pmpaycgi.php">CGI Payment module example</msg>
+      <msg name="module_pmpaycgi.php">CGI Payment module example</msg>
+    </messages>
+    <messages name="paymethod.edit.paycgi.php">
+      <msg name="secret">Secret word</msg>
+      <msg name="hint_secret">Secret word</msg>
+    </messages>
+  </lang>
+
+  <lang name="ru">
+    <messages name="label_paymethod">
+      <msg name="pmpaycgi.php">Пример простого модуля оплаты</msg>
+      <msg name="module_pmpaycgi.php">Пример простого модуля оплаты</msg>
+    </messages>
+    <messages name="paymethod.edit.paycgi.php">
+      <msg name="secret">Секретное слово</msg>
+      <msg name="hint_secret">Секретное слово</msg>
+    </messages>
+  </lang>
+</mgrdata>
