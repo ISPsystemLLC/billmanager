@@ -3,14 +3,6 @@
 $log_file = fopen("/usr/local/mgr5/var/". __MODULE__ .".log", "a");
 $default_xml_string = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<doc/>\n";
 
-function tmErrorHandler($errno, $errstr, $errfile, $errline) {
-	global $log_file;
-	fwrite($log_file, date("M j H:i:s") ." [". getmypid() ."] ERROR: ". $errno .": ". $errstr .". In file: ". $errfile .". On line: ". $errline ."\n");
-	return true;
-}
-
-set_error_handler("tmErrorHandler");
-
 function Debug($str) {
 	global $log_file;
 	fwrite($log_file, date("M j H:i:s") ." [". getmypid() ."] ". __MODULE__ ." \033[1;33mDEBUG ". $str ."\033[0m\n");
@@ -20,6 +12,14 @@ function Error($str) {
 	global $log_file;
 	fwrite($log_file, date("M j H:i:s") ." [". getmypid() ."] ". __MODULE__ ." \033[1;31mERROR ". $str ."\033[0m\n");
 }
+
+function tmErrorHandler($errno, $errstr, $errfile, $errline) {
+	global $log_file;
+	Error("ERROR: ". $errno .": ". $errstr .". In file: ". $errfile .". On line: ". $errline);
+	return true;
+}
+
+set_error_handler("tmErrorHandler");
 
 function LocalQuery($function, $param, $auth = NULL) {
 	$cmd = "/usr/local/mgr5/sbin/mgrctl -m billmgr -o xml " . escapeshellarg($function) . " ";

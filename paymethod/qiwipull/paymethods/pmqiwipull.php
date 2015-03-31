@@ -1,11 +1,18 @@
 #!/usr/bin/php
 <?php
 
+/**
+ * Adding PHP include
+ */
 set_include_path(get_include_path() . PATH_SEPARATOR . "/usr/local/mgr5/include/php");
 define('__MODULE__', "pmqiwipull");
 
 require_once 'bill_util.php';
 
+/**
+ * [$longopts description]
+ * @var array
+ */
 $longopts  = array
 (
     "command:",
@@ -15,6 +22,9 @@ $longopts  = array
 
 $options = getopt("", $longopts);
 
+/**
+ * Processing --command
+ */
 try {
 	$command = $options['command'];
 	Debug("command ". $options['command']);
@@ -23,11 +33,11 @@ try {
 		$config_xml = simplexml_load_string($default_xml_string);
 		$feature_node = $config_xml->addChild("feature");
 
-		// $feature_node->addChild("refund", 		"on");
-		// $feature_node->addChild("transfer", 		"on");
-		$feature_node->addChild("redirect", 		"on");
-		// $feature_node->addChild("noselect", 		"on");
-		$feature_node->addChild("notneedprofile", 	"on");
+		// $feature_node->addChild("refund", 		"on"); // If refund supported
+		// $feature_node->addChild("transfer", 		"on"); // If transfer supported
+		$feature_node->addChild("redirect", 		"on"); // If redirect supported
+		// $feature_node->addChild("noselect", 		"on"); // If noselect supported
+		$feature_node->addChild("notneedprofile", 	"on"); // If notneedprofile supported
 
 		$feature_node->addChild("pmtune", 			"on");
 		$feature_node->addChild("pmvalidate", 		"on");
