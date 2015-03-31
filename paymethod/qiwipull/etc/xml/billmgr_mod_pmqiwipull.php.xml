@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mgrdata>
+  <plugin name="pmqiwipull.php">
+    <group>payment_method</group>
+    <msg name="desc_short" lang="ru">QIWI PULL(REST)</msg>
+    <msg name="desc_short" lang="en">QIWI PULL(REST)</msg>
+    <msg name="desc_full" lang="ru">QIWI PULL(REST)</msg>
+    <msg name="desc_full" lang="en">QIWI PULL(REST)</msg>
+    <msg name="price" lang="ru">Бесплатно</msg>
+    <msg name="price" lang="en">Free</msg>
+  </plugin>
+
+  <metadata name="paymethod.edit.qiwipull.php" type="form">
+    <form>
+      <page name="methodprops">
+        <field name="API_ID">
+          <input name="API_ID" private="yes" required="yes" type="text"/>
+        </field>
+        <field name="PRV_ID">
+          <input name="PRV_ID" private="yes" required="yes" type="text"/>
+        </field>
+        <field name="API_PASSWORD">
+          <input name="API_PASSWORD" private="yes" required="yes" type="password"/>
+        </field>
+        <field name="NOTIFY_PASSWORD">
+          <input name="NOTIFY_PASSWORD" private="yes" required="yes" type="password"/>
+        </field>
+        <field name="pay_source">
+          <select name="pay_source" type="radio"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
+
+  <metadata name="payment.edit.qiwipull.php" type="form">
+    <form>
+      <field name="phone">
+        <input type="text" name="phone" required="yes" check="phone" checkargs="8,20,country"/>
+      </field>
+    </form>
+  </metadata>
+
+  <lang name="en">
+    <messages name="label_paymethod">
+      <msg name="pmqiwipull.php">QIWI PULL(REST)</msg>
+      <msg name="module_pmqiwipull.php">QIWI PULL(REST)</msg>
+    </messages>
+    <messages name="paymethod.edit.qiwipull.php">
+      <msg name="API_ID">API ID</msg>
+      <msg name="hint_API_ID">API ID from QIWI account</msg>
+      <msg name="PRV_ID">Project ID</msg>
+      <msg name="hint_PRV_ID">Project ID from QIWI account</msg>
+      <msg name="API_PASSWORD">API password</msg>
+      <msg name="hint_API_PASSWORD">Password for API request autentification</msg>
+      <msg name="NOTIFY_PASSWORD">Notification password</msg>
+      <msg name="hint_NOTIFY_PASSWORD">Password for payment status notification</msg>
+      <msg name="pay_source">Pay source</msg>
+      <msg name="hint_pay_source">Pay source</msg>
+      <msg name="qw">Any</msg>
+      <msg name="mobile">Mobile</msg>
+    </messages>
+    <messages name="payment.edit.qiwipull.php">
+      <msg name="phone">Phone</msg>
+      <msg name="hint_phone">Phone registred in Visa QIWI Wallet</msg>
+      <msg name="placeholder_phone">7 000 000 0000</msg>
+    </messages>
+  </lang>
+
+  <lang name="ru">
+    <messages name="label_paymethod">
+      <msg name="pmqiwipull.php">QIWI PULL(REST)</msg>
+      <msg name="module_pmqiwipull.php">QIWI PULL(REST)</msg>
+    </messages>
+    <messages name="paymethod.edit.qiwipull.php">
+      <msg name="API_ID">API ID</msg>
+      <msg name="hint_API_ID">API ID из личного кабинета QIWI</msg>
+      <msg name="PRV_ID">ID проекта</msg>
+      <msg name="hint_PRV_ID">ID проекта из личного кабинета QIWI</msg>
+      <msg name="API_PASSWORD">Пароль API</msg>
+      <msg name="hint_API_PASSWORD">Пароль API, отличается от пароля уведомлений</msg>
+      <msg name="NOTIFY_PASSWORD">Пароль уведомлений</msg>
+      <msg name="hint_NOTIFY_PASSWORD">Пароль проверки подписи уведомлений</msg>
+      <msg name="pay_source">Способ оплаты</msg>
+      <msg name="hint_pay_source">Способ оплаты счета</msg>
+      <msg name="qw">Любой</msg>
+      <msg name="mobile">Со счета мобильного телефона</msg>
+    </messages>
+    <messages name="payment.edit.qiwipull.php">
+      <msg name="phone">Номер телефона</msg>
+      <msg name="hint_phone">Номер телефона, на который зарегистрирова учетная запись в QIWI</msg>
+      <msg name="placeholder_phone">7 000 000 0000</msg>
+    </messages>
+  </lang>
+</mgrdata>
