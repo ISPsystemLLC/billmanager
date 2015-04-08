@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mgrdata>
+  <plugin name="pmregistrar.php">
+    <group>processing_module</group>
+    <params>
+      <type name="domain"/>
+    </params>
+    <msg name="desc_short" lang="ru">Тестовый регистратор</msg>
+    <msg name="desc_short" lang="en">Demo Registrar</msg>
+    <msg name="desc_full" lang="ru">Тестовый регистратор</msg>
+    <msg name="desc_full" lang="en">Demo Registrar</msg>
+    <msg name="price" lang="ru">Бесплатно</msg>
+    <msg name="price" lang="en">Free</msg>
+  </plugin>
+
+  <metadata name="processing.edit.pmregistrar.php" type="form">
+    <form title="name">
+      <page name="connect">
+        <field name="registrar_name">
+          <input name="registrar_name" required="yes" type="text"/>
+        </field>
+        <field name="password">
+          <input name="password" required="yes" type="password"/>
+        </field>
+        <field name="whois_lang">
+          <select name="whois_lang" type="radio"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
+
+  <lang name="en">
+    <messages name="label_processing_modules">
+      <msg name="pmregistrar.php">Demo Registrar</msg>
+      <msg name="module_pmregistrar.php">Demo Registrar</msg>
+    </messages>
+    <messages name="processing.edit.pmregistrar.php">
+      <msg name="registrar_name">Name of Registrar</msg>
+      <msg name="hint_registrar_name">Name of registrar for WHOIS</msg>
+      <msg name="whois_lang">Lang of WHOIS</msg>
+      <msg name="hint_whois_lang">Lang for WHOIS information show</msg>
+    </messages>
+  </lang>
+
+  <lang name="ru">
+    <messages name="label_processing_modules">
+      <msg name="pmregistrar.php">Тестовый регистратор</msg>
+      <msg name="module_pmregistrar.php">Тестовый регистратор</msg>
+    </messages>
+    <messages name="processing.edit.pmregistrar.php">
+      <msg name="registrar_name">Название регистратора</msg>
+      <msg name="hint_registrar_name">Название регистратора для отображения в WHOIS</msg>
+      <msg name="whois_lang">Язык</msg>
+      <msg name="hint_whois_lang">Язык отображения информации в WHOIS</msg>
+    </messages>
+  </lang>
+</mgrdata>
