@@ -424,6 +424,100 @@ try {
 		$ddb->query("UPDATE domain SET ns = '" . $ddb->real_escape_string($ns) . "' WHERE name = '" . $ddb->real_escape_string($item_param["domain"]) . "' AND status != 'deleted'");
 	} elseif ($command == "import") {
 		// Get list of domains and contact. Import into BILLmanager
+
+		$module = $options['module'];
+		$search = array_key_exists("searchstring", $options) ? $options['searchstring'] : "";
+
+		$search_array = explode(" ", $search);
+
+		$db = GetConnection();
+		$ddb = GetDomainConnection($module);
+
+		$sub_query = "";
+
+		foreach ($search_array as $domain) {
+			if ($domain == "")
+				continue;
+
+			if ($sub_query == "")
+				$sub_query .= " AND name in (";
+			else
+				$sub_query .= ",";
+			$sub_query .= "'" . $ddb->real_escape_string($domain) . "'";
+		}
+
+		if ($sub_query != "")
+			$sub_query .= ")";
+
+		$contact_array = array();
+		$type_array = array("customer", "owner", "admin", "bill", "tech");
+
+		Debug("sub_query: ". $sub_query);
+
+		$res = $ddb->query("SELECT customer, owner, admin, bill, tech, name, status, expiredate, ns FROM domain WHERE status != 'deleted'" . $sub_query);
+
+		while ($row = $res->fetch_assoc()) {
+			$tld_name = explode(".", $row["name"], 2)[1];
+			$tld_id = $db->query("SELECT id FROM tld WHERE name = '" . $db->real_escape_string($tld_name) . "'")->fetch_row()[0];
+
+			$domain_param = array();
+			$domain_param["sok"] = "ok";
+			$domain_param["expiredate"] = $row["expiredate"];
+			$domain_param["module"] = $module;
+			$domain_param["status"] = $row["status"] == "active" ? "2" : "8";
+			$domain_param["import_pricelist_intname"] = $tld_id;
+			$domain_param["import_service_name"] = $row["name"];
+			$domain_param["domain"] = $row["name"];
+
+			$service_id = LocalQuery("processing.import.service", $domain_param)->service_id;
+
+			foreach ($type_array as $type) {
+				Debug($type);
+				if (array_key_exists($row[$type], $contact_array) == false) {
+					$contact = $ddb->query("SELECT * FROM contact WHERE id  = '" . $ddb->real_escape_string($row[$type]) . "'")->fetch_assoc();
+					$contact_param = array();
+					$contact_param["sok"] = "ok";
+					$contact_param["type"] = $type;
+					$contact_param["name"] = $contact["firstname"];
+					$contact_param["module"] = $module;
+					$contact_param["externalid"] = $row[$type];
+					$contact_param["profiletype"] = "1";
+					$contact_param["firstname"] = $contact["firstname"];
+					$contact_param["middlename"] = $contact["middlename"];
+					$contact_param["lastname"] = $contact["lastname"];
+					$contact_param["firstname_locale"] = $contact["firstname"];
+					$contact_param["middlename_locale"] = $contact["middlename"];
+					$contact_param["lastname_locale"] = $contact["lastname"];
+					$contact_param["passport"] = "";
+					$contact_param["location_postcode"] = "";
+					$contact_param["location_state"] = "";
+					$contact_param["location_city"] = "";
+					$contact_param["location_address"] = "";
+					$contact_param["birth_date"] = "";
+					$contact_param["location_country"] = "";
+					$contact_param["postal_postcode"] = "";
+					$contact_param["postal_state"] = "";
+					$contact_param["postal_city"] = "";
+					$contact_param["postal_address"] = "";
+					$contact_param["postal_addressee"] = "";
+					$contact_param["phone"] = "";
+					$contact_param["fax"] = "";
+					$contact_param["email"] = "";
+					$contact_param["inn"] = "";
+					$contact_param["mobile"] = "";
+					$contact_param["company"] = "";
+					$contact_param["company_locale"] = "";
+					$contact_param["kpp"] = "";
+					$contact_param["ogrn"] = "";
+
+					$profile_id = LocalQuery("processing.import.profile", $contact_param)->profile_id;
+
+					$contact_array[$row[$type]] = $profile_id;
+				}
+
+				LocalQuery("service_profile2item.edit", array("sok" => "ok", "service_profile" => $contact_array[$row[$type]], "item" => $service_id, "type" => $type));
+			}
+		}
 	}
 } catch (Exception $e) {
 	if ($runningoperation > 0) {
