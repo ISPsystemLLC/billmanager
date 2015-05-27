@@ -24,7 +24,7 @@ set_error_handler("tmErrorHandler");
 function LocalQuery($function, $param, $auth = NULL) {
 	$cmd = "/usr/local/mgr5/sbin/mgrctl -m billmgr -o xml " . escapeshellarg($function) . " ";
 	foreach ($param as $key => $value) {
-		$cmd .= escapeshellarg($key) . "=" . escapeshellarg($value);
+		$cmd .= escapeshellarg($key) . "=" . escapeshellarg($value) . " ";
 	}
 
 	if (!is_null($auth)) {
@@ -133,6 +133,16 @@ function ClientIp() {
 	return $client_ip;
 }
 
+function RandomStr($size = 8) {
+    $chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $chars_size = strlen($chars);
+    $result = '';
+    for ($i = 0; $i < $size; $i++) {
+        $result .= $chars[rand(0, $chars_size - 1)];
+    }
+    return $result;
+}
+
 class Error extends Exception
 {
 	private $m_object = "";
@@ -181,6 +191,27 @@ class Error extends Exception
 		}
         return $error_xml->asXML();
     }
+}
+
+class DB extends mysqli {
+	public function __construct($host, $user, $pass, $db) {
+		parent::init();
+		if (!parent::options(MYSQLI_INIT_COMMAND, "SET AUTOCOMMIT = 1"))
+			throw new Error("MYSQLI_INIT_COMMAND Fail");
+
+		if (!parent::options(MYSQLI_OPT_CONNECT_TIMEOUT, 5))
+			throw new Error("MYSQLI_OPT_CONNECT_TIMEOUT Fail");
+
+		if (!parent::real_connect($host, $user, $pass, $db))
+			throw new Error("Connection ERROR. ".mysqli_connect_errno().": ".mysqli_connect_error());
+
+		Debug("MySQL connection established");
+	}
+
+	public function __destruct() {
+		parent::close();
+		Debug("MySQL connection closed");
+	}
 }
 
 ?>

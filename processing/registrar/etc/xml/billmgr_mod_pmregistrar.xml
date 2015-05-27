@@ -19,8 +19,17 @@
         <field name="registrar_name">
           <input name="registrar_name" required="yes" type="text"/>
         </field>
+        <field name="username">
+          <input name="username" required="yes" type="text"/>
+        </field>
         <field name="password">
           <input name="password" required="yes" type="password"/>
+        </field>
+        <field name="dbname">
+          <input name="dbname" required="yes" type="text"/>
+        </field>
+        <field name="dbhost">
+          <input name="dbhost" required="yes" type="text"/>
         </field>
         <field name="whois_lang">
           <select name="whois_lang" type="radio"/>
@@ -29,7 +38,41 @@
     </form>
   </metadata>
 
+  <metadata name="service_profile.pmregistrar.php.customer.my">
+    <form>
+      <field name="my_agree">
+        <input name="my_agree" type="checkbox"/>
+      </field>
+      <field name="my_usage">
+        <select name="my_usage" sorted="yes" required="yes"/>
+      </field>
+    </form>
+  </metadata>
+
+  <metadata name="domain.pmregistrar.php.my" type="form">
+    <form>
+      <field name="domain_desc">
+        <input type="text" name="domain_desc"/>
+      </field>
+    </form>
+  </metadata>
+
   <lang name="en">
+    <messages name="domain.order.contact">
+      <msg name="msg_error_customer_agree">Need agree</msg>
+    </messages>
+    <messages name="service_profile.pmregistrar.php.customer.my">
+      <msg name="my_agree">Agree</msg>
+      <msg name="hint_my_agree">Agree</msg>
+      <msg name="my_usage">Usage</msg>
+      <msg name="hint_my_usage">Usage</msg>
+      <msg name="my_usage_personal" rename="no">Personal</msg>
+      <msg name="my_usage_company" rename="no">Company</msg>
+    </messages>
+    <messages name="domain.pmregistrar.php.my">
+      <msg name="domain_desc">Domain description</msg>
+      <msg name="hint_domain_desc">Additional domain description</msg>
+    </messages>
     <messages name="label_processing_modules">
       <msg name="pmregistrar.php">Demo Registrar</msg>
       <msg name="module_pmregistrar.php">Demo Registrar</msg>
@@ -39,10 +82,30 @@
       <msg name="hint_registrar_name">Name of registrar for WHOIS</msg>
       <msg name="whois_lang">Lang of WHOIS</msg>
       <msg name="hint_whois_lang">Lang for WHOIS information show</msg>
+      <msg name="dbname">DB</msg>
+      <msg name="hint_dbname">DB name</msg>
+      <msg name="dbhost">Server</msg>
+      <msg name="hint_dbhost">DB server</msg>
     </messages>
   </lang>
 
   <lang name="ru">
+    <messages name="domain.order.contact">
+      <msg name="msg_error_customer_agree">Нужно согласиться</msg>
+    </messages>
+    <messages name="service_profile.pmregistrar.php.customer.my">
+      <msg name="my_agree">Соглашение на регистрацию</msg>
+      <msg name="hint_my_agree">Соглашение на регистрацию</msg>
+      <msg name="my_usage">Сценарий использования</msg>
+      <msg name="hint_my_usage">Сценарий использования</msg>
+      <msg name="my_usage_personal" rename="no">Персональное использвоание</msg>
+      <msg name="my_usage_company" rename="no">Для нужд компании</msg>
+      <msg name="msg_error_customer_agree" rename="no">Нужно согласиться</msg>
+    </messages>
+    <messages name="domain.pmregistrar.php.my">
+      <msg name="domain_desc">Описание домена</msg>
+      <msg name="hint_domain_desc">Дополнительное описание домена</msg>
+    </messages>
     <messages name="label_processing_modules">
       <msg name="pmregistrar.php">Тестовый регистратор</msg>
       <msg name="module_pmregistrar.php">Тестовый регистратор</msg>
@@ -52,6 +115,10 @@
       <msg name="hint_registrar_name">Название регистратора для отображения в WHOIS</msg>
       <msg name="whois_lang">Язык</msg>
       <msg name="hint_whois_lang">Язык отображения информации в WHOIS</msg>
+      <msg name="dbname">База данных</msg>
+      <msg name="hint_dbname">Название базы данных</msg>
+      <msg name="dbhost">Сервер</msg>
+      <msg name="hint_dbhost">Адрес сервера базы данных</msg>
     </messages>
   </lang>
 </mgrdata>
