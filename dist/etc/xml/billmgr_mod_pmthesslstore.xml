@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mgrdata>
+  <plugin name="pmthesslstore">
+    <group>processing_module</group>
+    <author>Alexander Brukhanov</author>
+    <params>
+      <type name="certificate"/>
+    </params>
+  </plugin>
+  <lang name="ru">
+    <messages name="plugin">
+      <msg name="desc_short_pmthesslstore">The SSL Store</msg>
+      <msg name="desc_full_pmthesslstore">Интеграция с The SSL Store</msg>
+	  <msg name="price_pmthesslstore">Бесплатно</msg>
+    </messages>
+    <messages name="processing.edit.pmthesslstore">
+      <msg name="url">API URL</msg>
+      <msg name="partner_code">Код партнера</msg>
+      <msg name="auth_token">Токен авторизации</msg>
+      <msg name="hint_url">URL доступа к API. Для тестовой среды используется https://sandbox-wbapi.thesslstore.com, для реальных заказов - https://api.thesslstore.com</msg>
+      <msg name="hint_partner_code">Код партнера The SSL Store (API Partner Code)</msg>
+      <msg name="hint_auth_token">Токен доступа к API (API Authentication Token)</msg>
+    </messages>
+    <messages name="certificate.organization.pmthesslstore.certum">
+      <msg name="org_incorporating_agency">Место регистрации</msg>
+      <msg name="hint_org_incorporating_agency">Учреждение, поставившее на учет организацию</msg>
+      <msg name="org_registration_number">Регистрационный номер</msg>
+      <msg name="hint_org_registration_number">Регистрационный номер, полученный при постановке организации на учет</msg>
+    </messages>
+    <messages name="processing.edit.pmthesslstore.createuser">
+      <msg name="outerlink">Ссылка на форму регистрации пользователя The SSL Store</msg>
+    </messages>
+    <messages name="certificate.organization.pmthesslstore.ucommercialssl">
+      <include name="certificate.organization.pmthesslstore.certum"/>
+    </messages>
+    <messages name="certificate.organization.pmthesslstore.ucommercialwildcard">
+      <include name="certificate.organization.pmthesslstore.certum"/>
+    </messages>
+    <messages name="certificate.organization.pmthesslstore.utrustedwildcard">
+      <include name="certificate.organization.pmthesslstore.certum"/>
+    </messages>
+    <messages name="certificate.organization.pmthesslstore.utrustedssl">
+      <include name="certificate.organization.pmthesslstore.certum"/>
+    </messages>
+  </lang>
+  <lang name="en">
+    <messages name="plugin">
+      <msg name="desc_short_pmthesslstore">The SSL Store</msg>
+      <msg name="desc_full_pmthesslstore">The SSL Store integration </msg>
+	  <msg name="price_pmthesslstore">Free</msg>
+    </messages>
+  </lang>
+  <metadata name="processing.edit.pmthesslstore" type="form">
+    <form title="name">
+      <page name="connect">
+        <field name="url">
+          <input type="text" name="url" required="yes" check="url"/>
+        </field>
+        <field name="partner_code">
+          <input type="text" name="partner_code" required="yes"/>
+        </field>
+        <field name="auth_token">
+          <input type="password" name="auth_token" required="yes"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
+  <metadata name="processing.edit.pmthesslstore.createuser" type="form">
+    <form>
+     <page name="createuser">
+        <field name="link">
+          <link name="outerlink" target="_blank"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
+  <metadata name="certificate.organization.pmthesslstore.certum" type="form">
+    <form title="name">
+      <page name="org_fields">
+        <field name="org_incorporating_agency">
+          <input type="text" name="org_incorporating_agency" required="yes" readonly="yes" check="certificatelatin"/>
+        </field>
+        <field name="org_registration_number">
+          <input type="text" name="org_registration_number" required="yes" readonly="yes" check="certificatelatin"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
+  <metadata name="certificate.organization.pmthesslstore.ucommercialssl" type="form">
+    <include name="certificate.organization.pmthesslstore.certum"/>
+  </metadata>
+  <metadata name="certificate.organization.pmthesslstore.ucommercialwildcard" type="form">
+    <include name="certificate.organization.pmthesslstore.certum"/>
+  </metadata>
+  <metadata name="certificate.organization.pmthesslstore.utrustedwildcard" type="form">
+    <include name="certificate.organization.pmthesslstore.certum"/>
+  </metadata>
+  <metadata name="certificate.organization.pmthesslstore.utrustedssl" type="form">
+    <include name="certificate.organization.pmthesslstore.certum"/>
+  </metadata>
+</mgrdata>
