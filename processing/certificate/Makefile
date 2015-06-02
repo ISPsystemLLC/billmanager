@@ -1,6 +1,7 @@
 VERSION = 0.0.1
 MGR = billmgr
 LANGS = en ru
+PLUGIN = pmthesslstore
 
 XMLLIST += dist/etc/xml/billmgr_mod_pmthesslstore.xml
 
