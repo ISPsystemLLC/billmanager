@@ -186,7 +186,7 @@ try {
 
 		// Check access to DB with domans
 		try {
-			new DB($dbhost, $dbuser, $password, $dbname);
+			new DB($dbhost, $username, $password, $dbname);
 		} catch (Exception $e) {
 			throw new Error("invalid_login_or_passwd");
 		}

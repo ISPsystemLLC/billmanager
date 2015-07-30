@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set("UTC");
+
 $log_file = fopen("/usr/local/mgr5/var/". __MODULE__ .".log", "a");
 $default_xml_string = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<doc/>\n";
 
