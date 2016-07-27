@@ -40,7 +40,7 @@ $longopts  = array
 $options = getopt("", $longopts);
 
 function GetConnection() {
-	$param = LocalQuery("otparamlist", array());
+	$param = LocalQuery("paramlist", array());
 	$result = $param->xpath('//elem/*');
 
 	$param_map = array();
