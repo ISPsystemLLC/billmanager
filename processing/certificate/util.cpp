@@ -178,7 +178,7 @@ string GetMgrConfParam(const string& name, const string& def_val) {
 	static bool initialized = false;
 	static StringMap params;
 	if (!initialized) {
-		auto paramList = ClientQuery ("out=xml&func=otparamlist").xml;
+		auto paramList = ClientQuery ("out=xml&func=paramlist").xml;
 		mgr_xml::XPath xpath = paramList.GetNodes ("/doc/elem");
 		ForEachI(xpath, elem) {
 			mgr_xml::XmlNode childNode = elem->FirstChild ();
