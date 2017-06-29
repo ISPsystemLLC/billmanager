@@ -87,7 +87,13 @@ function HttpQuery($url, $param, $requesttype = "POST", $username = "", $passwor
 
 function CgiInput($skip_auth = false) {
 	if ($_SERVER["REQUEST_METHOD"] == 'POST'){
-		$input = file_get_contents("php://stdin");
+		$size = $_SERVER["CONTENT_LENGTH"];
+		if ($size == 0) {
+			$size =	$_SERVER["HTTP_CONTENT_LENGTH"];
+		}
+		if (!feof(STDIN)) {
+			$input = fread(STDIN, $size);
+		}
 	} elseif ($_SERVER["REQUEST_METHOD"] == 'GET'){
 		$input = $_SERVER["QUERY_STRING"];
 	}
