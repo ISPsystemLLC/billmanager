@@ -12,7 +12,7 @@ $client_ip = ClientIp();
 $param = CgiInput();
 
 if ($param["auth"] == "") {
-	throw new Error("no auth info");
+	throw new ISPErrorException("no auth info");
 } else {
 	$info = LocalQuery("payment.info", array("elid" => $param["elid"], ));
 	$elid = (string)$info->payment[0]->id;
