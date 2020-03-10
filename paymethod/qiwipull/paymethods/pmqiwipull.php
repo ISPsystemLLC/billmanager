@@ -78,11 +78,11 @@ try {
 		Debug($PRV_ID);
 
 		if (!preg_match("/^\d+$/", $API_ID)) {
-			throw new Error("value", "API_ID", $API_ID);
+			throw new ISPErrorException("value", "API_ID", $API_ID);
 		}
 
 		if (!preg_match("/^\d+$/", $PRV_ID)) {
-			throw new Error("value", "PRV_ID", $PRV_ID);
+			throw new ISPErrorException("value", "PRV_ID", $PRV_ID);
 		}
 
 		echo $paymethod_form->asXML();
@@ -141,10 +141,10 @@ try {
 		if ($out_xml->result_code == "0") {
 			LocalQuery("payment.setinpay", array("elid" => $payment_id, ));
 		} else {
-			throw new Error("payment_process_error", "", "", array("error_msg" => $out_xml->description));
+			throw new ISPErrorException("payment_process_error", "", "", array("error_msg" => $out_xml->description));
 		}
 	} else {
-		throw new Error("unknown command");
+		throw new ISPErrorException("unknown command");
 	}
 } catch (Exception $e) {
 	echo $e;

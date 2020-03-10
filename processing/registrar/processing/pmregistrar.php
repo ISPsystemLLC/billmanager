@@ -65,7 +65,7 @@ function ItemParam($db, $iid) {
 					   WHERE i.id=" . $iid);
 
 	if ($res == FALSE)
-		throw new Error("query", $db->error);
+		throw new ISPErrorException("query", $db->error);
 
     $param = $res->fetch_assoc();
 
@@ -188,7 +188,7 @@ try {
 		try {
 			new DB($dbhost, $username, $password, $dbname);
 		} catch (Exception $e) {
-			throw new Error("invalid_login_or_passwd");
+			throw new ISPErrorException("invalid_login_or_passwd");
 		}
 
 		echo $default_xml_string;
@@ -261,7 +261,7 @@ try {
 		$tld = $options['param'];
 
 		if ($tld == "my" && $param_xml->customer_my_agree != "on")
-			throw new Error("customer_agree", "customer_my_agree");
+			throw new ISPErrorException("customer_agree", "customer_my_agree");
 
 	} elseif ($command == "open" || $command == "transfer") {
 		// Check if domain ixist in database and create it
@@ -274,7 +274,7 @@ try {
 		$ddb = GetDomainConnection($item_param["item_module"]);
 
 		if ($ddb->query("SELECT COUNT(*) FROM domain WHERE status != 'deleted' AND name = '" . $ddb->real_escape_string($item_param["domain"]) . "'")->fetch_row()[0] > 0)
-			throw new Error("exist");
+			throw new ISPErrorException("exist");
 
 		// Add service profiles into test DB (in real world send API requests to registrar)
 		$profile_params = ItemProfiles($db, $iid, $item_param["item_module"]);
@@ -305,7 +305,7 @@ try {
 																				  "externalpassword" => $externalpassword,
 																				  "sok" => "ok", ));
 					} else {
-						throw new Error("query", $db->error);
+						throw new ISPErrorException("query", $db->error);
 					}
 				}
 
@@ -337,7 +337,7 @@ try {
 			// open service in BILLmanager
 			LocalQuery("domain.open", array("elid" => $item, "sok" => "ok"));
 		} else {
-			throw new Error("query", $db->error);
+			throw new ISPErrorException("query", $db->error);
 		}
 	} elseif ($command == "suspend") {
 		// Update status of domain in test DB. Suspend domain if possible via registrar API or cancel auto prolong if need
