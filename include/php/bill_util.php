@@ -151,7 +151,7 @@ function RandomStr($size = 8) {
     return $result;
 }
 
-class Error extends Exception
+class ISPErrorException extends Exception
 {
 	private $m_object = "";
 	private $m_value = "";
