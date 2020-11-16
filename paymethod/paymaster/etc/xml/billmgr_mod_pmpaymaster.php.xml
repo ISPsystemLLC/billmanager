@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mgrdata>
+  <plugin name="pmpaymaster.php">
+    <group>payment_method</group>
+    <author>BILLmanager team</author>
+    <params>
+      <priority lang="ru">400</priority>
+      <priority lang="en">500</priority>
+    </params>
+  </plugin>
+  <metadata name="paymethod.edit.paymaster.php" type="form">
+    <form>
+      <page name="methodprops">
+        <field name="LMI_MERCHANT_ID">
+          <input type="text" name="LMI_MERCHANT_ID" required="yes"/>
+        </field>
+        <field name="hash_type">
+          <select name="hash_type"/>
+        </field>
+        <field name="apiurl">
+          <input type="text" name="apiurl" check="url" private="yes"/>
+        </field>
+        <field name="secret">
+          <input type="text" name="secret" private="yes" required="yes"/>
+        </field>
+      </page>
+      <page name="recurring">
+        <field name="recurring">
+          <input type="checkbox" name="recurring">
+          <if value="on" hide="system_type" shadow="yes"/>
+          <if value="off" hide="direct_secret"/>
+          <if value="off" hide="direct_hash_type"/>
+          </input>
+        </field>
+        <field name="direct_hash_type">
+          <select name="direct_hash_type"/>
+        </field>
+        <field name="direct_secret">
+          <input type="text" name="direct_secret" private="yes" required="yes"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
+  <lang name="ru">
+    <messages name="plugin">
+      <msg name="desc_short_pmpaymaster.php">PayMasterPHP</msg>
+      <msg name="desc_full_pmpaymaster.php">Интеграция с PayMaster на php</msg>
+      <msg name="price_pmpaymaster.php">Бесплатно</msg>
+    </messages>
+    <messages name="label_paymethod">
+      <msg name="pmpaymaster.php">PayMasterPHP</msg>
+      <msg name="module_pmpaymaster.php">PayMasterPHP</msg>
+    </messages>
+    <messages name="paymethod.edit.paymaster.php">
+      <msg name="LMI_MERCHANT_ID">Идентификатор магазина</msg>
+      <msg name="hint_LMI_MERCHANT_ID">Идентификатор учетной записи, под которым Компания зарегистрирована в системе Paymaster</msg>
+      <msg name="LMI_PAYMENT_SYSTEM">Метод оплаты</msg>
+      <msg name="hint_LMI_PAYMENT_SYSTEM">Укажите разрешенный метод оплаты</msg>
+      <msg name="secret">Секретный ключ</msg>
+      <msg name="hint_secret">Введите секретный ключ</msg>
+      <msg name="hash_type">Тип подписи</msg>
+      <msg name="hint_hash_type">Тип проверки подписи данных при получении уведомления о зачислении платежа</msg>
+      <msg name="md5">MD5</msg>
+      <msg name="sha1">SHA1</msg>
+      <msg name="sha256">SHA256</msg>
+      <msg name="LMI_PAYMENT_METHOD">Метод оплаты</msg>
+      <msg name="hint_LMI_PAYMENT_METHOD">Укажите разрешенный метод оплаты</msg>
+      <msg name="apiurl">URL платежного шлюза</msg>
+      <msg name="hint_apiurl">Укажите через какой шлюз производить оплату</msg>
+      <msg name="system_type">Способ указания метода оплаты</msg>
+      <msg name="hint_system_type">Выбирете способ указания метода оплаты. Предпочительным является указание "По имени"</msg>
+      <msg name="ST_LMI_PAYMENT_SYSTEM">По коду</msg>
+      <msg name="ST_LMI_PAYMENT_METHOD">По имени</msg>
+      <msg name="direct_secret">Секретный ключ</msg>
+    </messages>
+  </lang>
+</mgrdata>

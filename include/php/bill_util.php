@@ -86,16 +86,20 @@ function HttpQuery($url, $param, $requesttype = "POST", $username = "", $passwor
 }
 
 function CgiInput($skip_auth = false) {
-	if ($_SERVER["REQUEST_METHOD"] == 'POST'){
+	Debug(implode("\n", 
+			array_map( function ($v, $k) { return sprintf("%s='%s'", $k, $v); },
+			$_SERVER, 
+			array_keys($_SERVER))));
+
+	$input = $_SERVER["QUERY_STRING"];
+	if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 		$size = $_SERVER["CONTENT_LENGTH"];
 		if ($size == 0) {
 			$size =	$_SERVER["HTTP_CONTENT_LENGTH"];
 		}
 		if (!feof(STDIN)) {
-			$input = fread(STDIN, $size);
+			$input = $input."&".fread(STDIN, $size);
 		}
-	} elseif ($_SERVER["REQUEST_METHOD"] == 'GET'){
-		$input = $_SERVER["QUERY_STRING"];
 	}
 
 	$param = array();
@@ -149,6 +153,57 @@ function RandomStr($size = 8) {
         $result .= $chars[rand(0, $chars_size - 1)];
     }
     return $result;
+}
+
+// Если клиент пожелал сохранить способ оплаты после зачисления платежа
+// Вызывать, когда платежная система поддерживает оплату с одновременным сохранением токена
+function NeedSaveCardOnPayment($info) {
+	return $info->payment->stored_payment == "on";
+}
+
+//
+//$info - информация о платеже. Помимо этого может содержать сведения для совершения повторных безакцептных платежей, если клиент пожелал сохранить способ оплаты
+//$info = array (
+// "elid" => 123,  - платеж в биллинге
+// "externalid" => "12341423" - платеж на стороне платежки
+// "stored_status"      => SavedCardStatuses::rsStored,
+// "stored_token"       => "ASDFJKfu89fasdf",
+// "stored_name"        => "4xxxxxxxxxxxxx01",
+// "stored_expire_date" => "2021-02-02"
+//)
+function SetPaid($elid, $info) {
+	$info["elid"] = $elid;
+	LocalQuery("payment.setpaid", $info);
+}
+
+function SavePaymethodToken($elid, $info) {
+	$info["elid"] = $elid;
+	LocalQuery("stored_method.save", $info);
+}
+
+function SaveAutopaymentToken($elid, $info) {
+	$info["elid"] = $elid;
+	LocalQuery("payment.recurring.saveinfo", $info);
+}
+
+function AddRedirectAutopaymentSuccessPage() {
+	AddRedirectToPage("payment.recurring.success");
+}
+
+function AddRedirectAutopaymentFailPage() {
+	AddRedirectToPage("payment.recurring.fail");
+}
+
+function AddRedirectToStoredMethodSuccessPage() {
+	AddRedirectToPage("payment.stored_methods.success");
+}
+
+function AddRedirectToStoredMethodFailPage() {
+	AddRedirectToPage("payment.stored_methods.fail");
+}
+
+function AddRedirectToPage($page) {
+	echo "<script language='JavaScript'>location='https://".$_SERVER["HTTP_HOST"]."?func=".$page."'</script>";
 }
 
 class ISPErrorException extends Exception

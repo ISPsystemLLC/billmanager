@@ -58,9 +58,9 @@ if ($x_api_signature == "") {
 				if ($error == "0" && $amount == (string)$info->payment[0]->paymethodamount && $iso == (string)$info->payment[0]->currency[1]->iso) {
 					if ($status == "paid") {
 						LocalQuery("payment.setpaid", array("elid" => $param["bill_id"], ));
-					} else if (status == "waiting") {
+					} else if ($status == "waiting") {
 						LocalQuery("payment.setinpay", array("elid" => $param["bill_id"], ));
-					} else if (status == "rejected" || status == "unpaid" || status == "expired") {
+					} else if ($status == "rejected" || $status == "unpaid" || $status == "expired") {
 						LocalQuery("payment.setnopay", array("elid" => $param["bill_id"], ));
 					}
 					$out_xml->addChild("result_code", "0");
