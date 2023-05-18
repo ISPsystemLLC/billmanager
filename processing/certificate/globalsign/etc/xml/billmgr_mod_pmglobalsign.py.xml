@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mgrdata>
+  <plugin name="pmglobalsign.py">
+    <group>processing_module</group>
+    <author>BILLmanager team</author>
+    <params>
+      <type name="certificate"/>
+    </params>
+  </plugin>
+  <metadata name="processing.edit.pmglobalsign.py" type="form">
+    <form title="name">
+      <page name="connect">
+        <field name="username">
+          <input type="text" name="username" required="yes"/>
+        </field>
+        <field name="password">
+          <input type="password" name="password" required="yes"/>
+        </field>
+        <field name="usedemo">
+          <input type="checkbox" name="usedemo"/>
+        </field>
+        <field name="sourceip">
+          <select name="sourceip"/>
+        </field>
+        <field name="alter_approver_methods">
+          <input type="checkbox" name="alter_approver_methods"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
+  <lang name="ru">
+    <messages name="plugin">
+      <msg name="desc_short_pmglobalsign.py">GlobalSign Py</msg>
+      <msg name="desc_full_pmglobalsign.py">Интеграция с GlobalSign написанная на Python</msg>
+      <msg name="price_pmglobalsign.py">Бесплатно</msg>
+    </messages>
+    <messages name="label_processing_modules">
+      <msg name="pmglobalsign.py">GlobalSign Py</msg>
+      <msg name="module_pmglobalsign.py">GlobalSign Py</msg>
+    </messages>
+    <messages name="processing.edit.pmglobalsign.py">
+      <msg name="password">Пароль</msg>
+      <msg name="usedemo">Демо доступ</msg>
+      <msg name="hint_username">Имя пользователя центра выдачи сертификатов GlobalSign</msg>
+      <msg name="hint_password">Пароль для доступа к API системы</msg>
+      <msg name="hint_usedemo">Использование демо доступа для тестового заказа</msg>
+      <msg name="sourceip">IP-адрес доступа</msg>
+      <msg name="hint_sourceip">IP-адрес, с которого будут осуществляться API запросы</msg>
+    </messages>
+    <messages name="pricelist.certificate">
+      <msg name="DV_LOW">Alpha SSL</msg>
+      <msg name="DV">Domain SSL</msg>
+      <msg name="OV">Organization SSL</msg>
+      <msg name="EV">Extended SSL</msg>
+      <msg name="DV_LOW_wild">Alpha SSL Wildcard</msg>
+      <msg name="DV_wild">Domain SSL Wildcard</msg>
+      <msg name="OV_wild">Organization SSL Wildcard</msg>
+    </messages>
+    <messages name="processing.customparam.names.pmglobalsign.py">
+      <msg name="default_OU">Подразделение по-умолчанию</msg>
+    </messages>
+  </lang>
+  <lang name="en">
+    <messages name="plugin">
+      <msg name="desc_short_pmglobalsign.py">GlobalSign Py</msg>
+      <msg name="desc_full_pmglobalsign.py">GlobalSign integration </msg>
+      <msg name="price_pmglobalsign.py">Free</msg>
+    </messages>
+  </lang>
+</mgrdata>
