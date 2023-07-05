@@ -147,6 +147,8 @@ def get_SAN_option_type(cn: str, alt_name: str):
             if domain[0] in uc_prefix and domain[1] == cn:
                 return "1"
             return "2"
+        elif alt_name.split(".")[0] == "*":
+            return "13"
         return "7"
 
 
@@ -279,6 +281,8 @@ class GlobalSign:
         org_info = ET.Element("OrganizationInfo")
         name = ET.SubElement(org_info, "OrganizationName")
         name.text = self.__item_params["org_name"]
+        duns = ET.SubElement(org_info, "OrganizationCode")
+        duns.text = self.__item_params.get("org_duns")
         address = ET.SubElement(org_info, "OrganizationAddress")
         address1 = ET.SubElement(address, "AddressLine1")
         address1.text = self.__item_params["org_address"]
@@ -301,6 +305,8 @@ class GlobalSign:
         org_info_ev = ET.Element("OrganizationInfoEV")
         name = ET.SubElement(org_info_ev, "BusinessAssumedName")
         name.text = self.__item_params["org_name"]
+        duns = ET.SubElement(org_info_ev, "OrganizationCode")
+        duns.text = self.__item_params.get("org_duns")
         code = ET.SubElement(org_info_ev, "BusinessCategoryCode")
         code.text = "BE"
         address = ET.SubElement(org_info_ev, "OrganizationAddress")
@@ -1154,7 +1160,7 @@ def approver(module, domain: str):
     for dom in domains:
         dom_node = ET.SubElement(approver, "domain")
         dom_node.set("name", dom)
-        approver_list = api.get_DV_approverlist(domain)
+        approver_list = api.get_DV_approverlist(dom)
         for email in approver_list:
             approver_node = ET.SubElement(dom_node, "approver")
             approver_node.text = email
