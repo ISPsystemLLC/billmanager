@@ -140,16 +140,15 @@ def get_SAN_option_type(cn: str, alt_name: str):
         ):
             return "4"
         return "3"
-    else:
-        if alt_name.endswith("." + cn):
-            uc_prefix = {"www", "owa", "mail", "autodiscover"}
-            domain = alt_name.split(".")
-            if domain[0] in uc_prefix and domain[1] == cn:
-                return "1"
-            return "2"
-        elif alt_name.split(".")[0] == "*":
-            return "13"
-        return "7"
+    if alt_name.split(".")[0] == "*":
+        return "13"
+    if alt_name.endswith("." + cn):
+        uc_prefix = {"www", "owa", "mail", "autodiscover"}
+        domain = alt_name.split(".")
+        if domain[0] in uc_prefix and domain[1] == cn:
+            return "1"
+        return "2"
+    return "7"
 
 
 class Api:
@@ -1060,14 +1059,18 @@ def features():
     dv_wild.set("wildcard", "yes")
     dv_wild.set("authemail", "yes")
     dv_wild.set("authdnstxt", "yes")
+    dv_wild.set("multidomain", "yes")
     ov = ET.SubElement(templates_node, "template")
     ov.set("id", "OV")
     ov.set("multidomain", "yes")
     ov.set("orginfo", "yes")
+    ov.set("multidomain_wildcard", "yes")
     ov_wild = ET.SubElement(templates_node, "template")
     ov_wild.set("id", "OV_wild")
     ov_wild.set("wildcard", "yes")
     ov_wild.set("orginfo", "yes")
+    ov_wild.set("multidomain", "yes")
+    ov_wild.set("multidomain_wildcard", "yes")
     ev = ET.SubElement(templates_node, "template")
     ev.set("id", "EV")
     ev.set("multidomain", "yes")
@@ -1198,6 +1201,10 @@ def tune_connection():
     ET.dump(xml)
 
 
+def set_param(item):
+    misc.postsetparam(item)
+
+
 def get_args():
     parser = argparse.ArgumentParser(description="Processing virtual servers")
     parser.add_argument("--command", type=str, help="command name", dest="command")
@@ -1264,6 +1271,9 @@ def process_command():
 
         elif args.command == "tune_connection":
             tune_connection()
+
+        elif args.command == "setparam":
+            set_param(args.item)
 
         else:
             raise exc.XmlException("unknown command", "", args.command)
