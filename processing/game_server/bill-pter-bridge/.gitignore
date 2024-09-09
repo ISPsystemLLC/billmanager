@@ -1,0 +1,5 @@
+__pycache__/
+.idea/
+test*
+venv/
+test_check_con.xml
