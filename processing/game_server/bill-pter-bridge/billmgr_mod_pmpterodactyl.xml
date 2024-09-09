@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mgrdata>
+	<plugin name="pmpterodactyl">
+		<group>processing_module</group>
+		<author>BILLmanager team</author>
+		<params>
+			<priority lang="ru">3700</priority>
+			<priority lang="en">1800</priority>
+			<type name="vds"/>
+			<type name="game_server"/>
+		</params>
+	</plugin>
+
+	<metadata name="processing.edit.pmpterodactyl" type="form">
+		<form>
+			<page name="methodprops">
+				<field name="base_url">
+					<input type="text" name="base_url" private="yes" required="yes" />
+				</field>
+				<field name="api_key">
+					<input type="text" name="api_key" private="yes" required="yes"/>
+				</field>
+				<field name="admin_api_key">
+					<input type="text" name="admin_api_key" private="yes" required="yes"/>
+				</field>
+				<field name="pter_location_id">
+					<input type="text" name="pter_location_id" private="yes" required="yes"/>
+				</field>
+			</page>
+		</form>
+	</metadata>
+
+	<metadata name="pricelist.pmpterodactyl" type="form">
+		<form>
+			<field name="nest">
+				<select name="nest" required="yes"/>
+			</field>
+			<field name="egg">
+				<select name="egg" required="yes" depend="nest"/>
+			</field>
+		</form>
+	</metadata>
+
+	<lang name="ru">
+		<messages name="plugin">
+			<msg name="desc_short_pmpterodactyl">Pterodactyl</msg>
+			<msg name="desc_full_pmpterodactyl">Интеграция с pterodactyl</msg>
+			<msg name="price_pmpterodactyl">Бесплатно</msg>
+		</messages>
+		<messages name="label_processing_modules">
+			<msg name="pmpterodactyl">Pterodactyl</msg>
+			<msg name="module_pmpterodactyl">Pterodactyl</msg>
+		</messages>
+		<messages name="processing.edit.pmpterodactyl">
+			<msg name="base_url">URL</msg>
+			<msg name="api_key">API ключ панели</msg>
+			<msg name="admin_api_key">API ключ пользователя</msg>
+			<msg name="pter_location_id">ID локации</msg>
+			<msg name="hint_pter_location_id">ID локации в Pterodactyl, в которой будут создаваться серверы</msg>
+			<msg name="hint_base_url">Ссылка на базовую страницу панели Pterodactyl, например https://my.panel.example</msg>
+			<msg name="hint_api_key">API ключ панели, генерируется в настройках панели Pterodactyl</msg>
+			<msg name="hint_admin_api_key">API ключ пользователя с правами администратора, генерируется в настройках пользователя в панели Pterodactyl</msg>
+			<msg name="placeholder_base_url">https://my.panel.example</msg>
+		</messages>
+		<messages name="msgerror">
+			<msg name="msg_error_wrong_panel_info">Введены неверные данные панели или панель недоступна. Проверьте выделенные права для API ключа.</msg>
+			<msg name="msg_error_server_del">Не удалось удалить сервер.</msg>
+			<msg name="msg_error_changepassword">Не удалось изменить пароль.</msg>
+			<msg name="msg_error_unknown_user">Пользователь с вашим ID не обнаружен.</msg>
+			<msg name="msg_error_unknown_ip">Сервер с вашим IP не обнаружен.</msg>
+			<msg name="msg_error_cannot_delete_ip">Не возможно удалить IP.</msg>
+			<msg name="msg_error_not_implemented">Не реализовано.</msg>
+		</messages>
+		<messages name="pricelist.pmpterodactyl">
+			<msg name="nest">Nest</msg>
+			<msg name="egg">Egg</msg>
+			<msg name="hint_nest">Игра/движок сервера</msg>
+			<msg name="hint_egg">Тип игрового сервера. Зависит от Nest</msg>
+		</messages>
+	</lang>
+
+	<lang name="en">
+		<messages name="plugin">
+			<msg name="desc_short_pmpterodactyl">Pterodactyl</msg>
+			<msg name="desc_full_pmpterodactyl">Pterodactyl integration</msg>
+			<msg name="price_pmpterodactyl">Free</msg>
+		</messages>
+	</lang>
+</mgrdata>

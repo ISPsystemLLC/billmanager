@@ -1,0 +1,5 @@
+requests==2.31
+py-dactyl==2.0.4
+setuptools-rust==1.1.2
+pyopenssl==22.1.0
+urllib3==2.2.2
