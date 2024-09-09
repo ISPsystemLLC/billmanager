@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://widget.cloudpayments.ru/bundles/cloudpayments"></script>
+  <title>CloudPayments Payment</title>
+</head>
+<script>
+  const result_cgi = "$result_cgi"
+  
+  let language = "$language";
+
+  if (language == null){
+    language = navigator.language
+  }
+
+  function pay() {
+  var widget = new cp.CloudPayments({
+      language: language,
+      email: "",
+  })
+  console.log($widget_data)
+  widget.pay('charge', $widget_data, {
+      onSuccess: function(data) {
+        // Redirect to BILLmanager cgi
+        const params = new URLSearchParams();
+        params.append("invoiceId", data.invoiceId);
+        window.location.assign(result_cgi + "?" + params.toString());
+        },
+      onFail: function(reason, data) {
+        const params = new URLSearchParams();
+        params.append("invoiceId", data.invoiceId);
+        window.location.assign(result_cgi + "?" + params.toString());
+      },
+      })
+  }
+  window.addEventListener('load', pay)
+</script>
+
+</html>

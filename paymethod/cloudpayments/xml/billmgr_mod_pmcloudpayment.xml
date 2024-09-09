@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mgrdata>
+  <plugin name="pmcloudpaymentswidget">
+    <group>payment_method</group>
+    <author>BILLmanager team</author>
+    <params>
+      <priority lang="ru">3700</priority>
+      <priority lang="en">1800</priority>
+    </params>
+  </plugin>
+
+
+  <!--Вкладка настройки интеграции при создании метода оплаты в лк-->
+  <metadata name="paymethod.edit.cloudpaymentswidget" type="form">
+    <form>
+      <page name="methodprops">
+        <field name="publickey">
+          <input type="text" name="publickey" private="yes" required="yes"/>
+        </field>
+        <field name="apisecret">
+          <input type="password" name="apisecret" private="yes" required="yes"/>
+        </field>
+      </page>
+      <page name="recurring">
+        <field name="recurring">
+          <input type="checkbox" name="recurring"/>
+        </field>
+      </page>
+      <page name="refundpage">
+        <field name="allowrefund">
+          <input type="checkbox" name="allowrefund" />
+        </field>
+      </page>
+    </form>
+  </metadata>
+
+  <!--Возврат в случае успешной оплаты-->
+  <metadata name="payment.cloudpayment.success" type="form">
+  <form> 
+    <field name="success_description" noname="yes" formwidth="yes">
+    <textdata name="success_description"/>
+    </field>
+  </form>
+  </metadata>
+
+  <!--Возврат в случае ошибки оплаты-->
+  <metadata name="payment.cloudpayment.fail" type="form">
+  <form>
+    <field name="fail_description" noname="yes" formwidth="yes">
+    <textdata name="fail_description"/>
+    </field>
+  </form>
+  </metadata>
+
+
+  <lang name="ru">
+    <!--Отображение начальной кнопки в ЛК-->
+    <messages name="plugin">
+      <msg name="desc_short_pmcloudpaymentswidget">CloudPayments<![CDATA[<sup><font color="#008000">NEW</font></sup>]]></msg>
+      <msg name="desc_full_pmcloudpaymentswidget">Интеграция с CloudPayments Widget</msg>
+      <msg name="price_pmcloudpaymentswidget">Бесплатно</msg>
+    </messages>
+
+    <messages name="label_paymethod">
+      <msg name="pmcloudpaymentswidget">CloudPayments</msg>
+      <msg name="module_pmcloudpaymentswidget">CloudPayments</msg>
+    </messages>
+
+    <!--Отображение настройки интеграции-->
+    <messages name="paymethod.edit.cloudpaymentswidget">
+      <msg name="publickey">Идентификатор Public ID</msg>
+      <msg name="apisecret">Пароль для API</msg>
+      <msg name="hint_publickey">Идентификатор сайта, который находится в ЛК терминала</msg>
+      <msg name="hint_apisecret">В качестве ключа используется API Secret, который можно получить в личном кабинете</msg>
+    </messages>
+
+    <!--Отображение успешной оплаты-->
+    <messages name="payment.cloudpaymentswidget.success">
+      <msg name="success_description">Успех</msg>
+    </messages>
+    
+    <!--Отображение ошибки оплаты-->
+    <messages name="payment.cloudpaymentswidget.fail">
+      <msg name="fail_description">Ошибка</msg>
+    </messages>
+
+    <messages name="msgerror">
+      <msg name="msg_error_wrong_terminal_info">Введены неверные данные терминала или терминал заблокирован</msg>
+      <msg name="msg_error_payment_fraud">Платёжная система посчитала платёж мошенническим</msg>
+      <msg name="msg_error_no_payment_id_provided">Платёжная система не вернула номер счёта</msg>
+      <msg name="msg_error_status_rejected">Платёжная система отклонила платёж</msg>
+      <msg name="msg_error_generic_error">Произошла ошибка</msg>
+      <msg name="msg_error_unknown_error">Произошла неизвестная ошибка</msg>
+      <msg name="msg_error_json_parsing_error_null_response">Пустой ответ от платежной системы</msg>
+      <msg name="msg_error_not_enough_money_to_refund">Недостаточно денег в платеже для совершения возврата</msg>
+      <msg name="msg_error_only_support_rubles">Для оплаты поддерживаются только рубли</msg>
+      <msg name="msg_error_unsupported_currency">Выбранная валюта не поддерживается. Доступные валюты: __currencies__</msg>
+      <msg name="msg_error_capture_payment_cancelled">Платёж отменён</msg>
+      <msg name="msg_error_capture_payment_invalid_status">Платежный шлюз вернул неизвестный статус: __value__</msg>
+      <msg name="msg_error_capture_payment_model_not_exist">Платёжная система вернула неверный ответ: __message__</msg>
+      <msg name="msg_error_refund_failure">Невозможно завершить процесс возврата денежных средств: __reason__</msg>
+      <msg name="msg_error_recurring_failure">Невозможно создать автоплатеж: __reason__</msg>
+      <msg name="msg_error_token_not_found">Не удалось сгенерировать токен</msg>
+    </messages>
+  </lang>
+
+  <lang name="en">
+    <!--Displaying the start button in the personal account-->
+    <messages name="plugin">
+      <msg name="desc_short_pmcloudpaymentswidget">CloudPayments<![CDATA[<sup><font color="#008000">NEW</font></sup>]]></msg>
+      <msg name="desc_full_pmcloudpaymentswidget">Integration with CloudPayments Widget</msg>
+      <msg name="price_pmcloudpaymentswidget">Free</msg>
+    </messages>
+
+    <messages name="label_paymethod">
+      <msg name="pmcloudpaymentswidget">CloudPayments</msg>
+      <msg name="module_pmcloudpaymentswidget">CloudPayments</msg>
+    </messages>
+
+    <!--Display the integration setup-->
+    <messages name="paymethod.edit.cloudpaymentswidget">
+      <msg name="publickey">Identifier Public ID</msg>
+      <msg name="apisecret">API password</msg>
+      <msg name="hint_publickey">Identifier of the site that is located in the terminal's personal account</msg>
+      <msg name="hint_apisecret">The Secret API is used as a key, which can be obtained in your personal account</msg>
+    </messages>
+
+    <!--Displaying a successful payment-->
+    <messages name="payment.cloudpaymentswidget.success">
+      <msg name="success_description">Success</msg>
+    </messages>
+    
+    <!--Displaying a payment error-->
+    <messages name="payment.cloudpaymentswidget.fail">
+      <msg name="fail_description">Error</msg>
+    </messages>
+
+    <messages name="msgerror">
+      <msg name="msg_error_wrong_terminal_info">Incorrect terminal data entered or terminal locked</msg>
+      <msg name="msg_error_payment_fraud">The payment system considered the payment fraudulent</msg>
+      <msg name="msg_error_no_payment_id_provided">The payment system did not return the account number</msg>
+      <msg name="msg_error_status_rejected">Payment system declined payment</msg>
+      <msg name="msg_error_generic_error">An error has occurred</msg>
+      <msg name="msg_error_unknown_error">An unknown error has occurred</msg>
+      <msg name="msg_error_json_parsing_error_null_response">Empty response from the payment system</msg>
+      <msg name="msg_error_not_enough_money_to_refund">Not enough money to make a refund</msg>
+      <msg name="msg_error_only_support_rubles">Only rubles are supported for payment</msg>
+      <msg name="msg_error_unsupported_currency">The selected currency isn't supported. Available currencies: __currencies__</msg>
+      <msg name="msg_error_capture_payment_declined">Payment declined</msg>
+      <msg name="msg_error_capture_payment_cancelled">Payment cancelled</msg>
+      <msg name="msg_error_capture_payment_invalid_status">Payment gateway returned unknown status: __value__</msg>
+      <msg name="msg_error_capture_payment_model_not_exist">The payment system returned an incorrect answer: __message__</msg>
+      <msg name="msg_error_refund_failure">Unable to complete the refund process: __reason__</msg>
+      <msg name="msg_error_recurring_failure">Unable to create an autopayment: __reason__</msg>
+      <msg name="msg_error_token_not_found">Failed to generate a token</msg>
+    </messages>
+  </lang>
+</mgrdata>
