@@ -28,6 +28,15 @@
       </page>
     </form>
   </metadata>
+  <metadata name="organization.pmglobalsign.py" type="form">
+    <form title="name">
+      <page name="org_fields">
+        <field name="org_duns">
+          <input type="text" name="org_duns" check="certificatelatin"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
   <lang name="ru">
     <messages name="plugin">
       <msg name="desc_short_pmglobalsign.py">GlobalSign Py</msg>
@@ -58,6 +67,10 @@
     </messages>
     <messages name="processing.customparam.names.pmglobalsign.py">
       <msg name="default_OU">Подразделение по-умолчанию</msg>
+    </messages>
+    <messages name="organization.pmglobalsign.py">
+      <msg name="org_duns">DUNS</msg>
+      <msg name="hint_org_duns">DUNS номер организации. Наличие может ускорить прохождение проверки организации</msg>
     </messages>
   </lang>
   <lang name="en">

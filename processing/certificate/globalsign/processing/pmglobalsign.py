@@ -140,14 +140,15 @@ def get_SAN_option_type(cn: str, alt_name: str):
         ):
             return "4"
         return "3"
-    else:
-        if alt_name.endswith("." + cn):
-            uc_prefix = {"www", "owa", "mail", "autodiscover"}
-            domain = alt_name.split(".")
-            if domain[0] in uc_prefix and domain[1] == cn:
-                return "1"
-            return "2"
-        return "7"
+    if alt_name.split(".")[0] == "*":
+        return "13"
+    if alt_name.endswith("." + cn):
+        uc_prefix = {"www", "owa", "mail", "autodiscover"}
+        domain = alt_name.split(".")
+        if domain[0] in uc_prefix and domain[1] == cn:
+            return "1"
+        return "2"
+    return "7"
 
 
 class Api:
@@ -279,6 +280,8 @@ class GlobalSign:
         org_info = ET.Element("OrganizationInfo")
         name = ET.SubElement(org_info, "OrganizationName")
         name.text = self.__item_params["org_name"]
+        duns = ET.SubElement(org_info, "OrganizationCode")
+        duns.text = self.__item_params.get("org_duns")
         address = ET.SubElement(org_info, "OrganizationAddress")
         address1 = ET.SubElement(address, "AddressLine1")
         address1.text = self.__item_params["org_address"]
@@ -301,6 +304,8 @@ class GlobalSign:
         org_info_ev = ET.Element("OrganizationInfoEV")
         name = ET.SubElement(org_info_ev, "BusinessAssumedName")
         name.text = self.__item_params["org_name"]
+        duns = ET.SubElement(org_info_ev, "OrganizationCode")
+        duns.text = self.__item_params.get("org_duns")
         code = ET.SubElement(org_info_ev, "BusinessCategoryCode")
         code.text = "BE"
         address = ET.SubElement(org_info_ev, "OrganizationAddress")
@@ -1054,14 +1059,18 @@ def features():
     dv_wild.set("wildcard", "yes")
     dv_wild.set("authemail", "yes")
     dv_wild.set("authdnstxt", "yes")
+    dv_wild.set("multidomain", "yes")
     ov = ET.SubElement(templates_node, "template")
     ov.set("id", "OV")
     ov.set("multidomain", "yes")
     ov.set("orginfo", "yes")
+    ov.set("multidomain_wildcard", "yes")
     ov_wild = ET.SubElement(templates_node, "template")
     ov_wild.set("id", "OV_wild")
     ov_wild.set("wildcard", "yes")
     ov_wild.set("orginfo", "yes")
+    ov_wild.set("multidomain", "yes")
+    ov_wild.set("multidomain_wildcard", "yes")
     ev = ET.SubElement(templates_node, "template")
     ev.set("id", "EV")
     ev.set("multidomain", "yes")
@@ -1154,7 +1163,7 @@ def approver(module, domain: str):
     for dom in domains:
         dom_node = ET.SubElement(approver, "domain")
         dom_node.set("name", dom)
-        approver_list = api.get_DV_approverlist(domain)
+        approver_list = api.get_DV_approverlist(dom)
         for email in approver_list:
             approver_node = ET.SubElement(dom_node, "approver")
             approver_node.text = email
@@ -1190,6 +1199,10 @@ def tune_connection():
         elem.set("key", addr)
 
     ET.dump(xml)
+
+
+def set_param(item):
+    misc.postsetparam(item)
 
 
 def get_args():
@@ -1258,6 +1271,9 @@ def process_command():
 
         elif args.command == "tune_connection":
             tune_connection()
+
+        elif args.command == "setparam":
+            set_param(args.item)
 
         else:
             raise exc.XmlException("unknown command", "", args.command)
