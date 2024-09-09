@@ -7,3 +7,6 @@ all:
 
 globalsign:
 	cp -a processing/certificate/globalsign/* /usr/local/mgr5/
+
+cloudpayments:
+	@cd paymethod/cloudpayments && sh install.sh
