@@ -5,13 +5,14 @@ LOGO_DIR = /usr/local/mgr5/skins/common/plugin-logo
 all: install
 
 install:
-	apt install python3-pip
-	apt install billmanager-plugin-python-libs
-	pip install -r requirements.txt
-	#xml
-	cp ./billmgr_mod_pmpterodactyl.xml  $(XML_DIR)
-	#main exec
+	# requirements
+	pip3 install -r requirements.txt
+	# logo
+	cp ./assets/billmanager-plugin-pmpterodactyl.png  $(LOGO_DIR)
+	# xml
+	cp ./billmgr_mod_pmpterodactyl.xml $(XML_DIR)
+	# main exec
 	ln -snf $(shell pwd)/pmpterodactyl.py $(EXEC_DIR)pmpterodactyl
 	chmod 775 $(EXEC_DIR)pmpterodactyl
-	cp ./assets/billmanager-plugin-pmpterodactyl.png  $(LOGO_DIR)
+	# restart billmgr
 	/usr/local/mgr5/sbin/mgrctl -m billmgr -R
