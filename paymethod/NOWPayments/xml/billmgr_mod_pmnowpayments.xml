@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mgrdata>
+  <plugin name="pmnowpayments">
+    <group>payment_method</group>
+    <author>BILLmanager team</author>
+    <params>
+      <priority lang="en">3810</priority>
+      <priority lang="ru">1800</priority>
+    </params>
+  </plugin>
+
+  <metadata name="paymethod.edit.nowpayments" type="form">
+    <form>
+      <page name="methodprops">
+        <field name ="email">
+          <input type="text" name="email" private="yes" required="yes" check="email"/>
+        </field>
+        <field name ="password">
+          <input type="password" name="password" private="yes" required="yes"/>
+        </field>
+        <field name ="api_key">
+          <input type="password" name="api_key" private="yes" required="yes"/>
+        </field>
+        <field name="test">
+          <input type="checkbox" name="test" private="yes"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
+
+  <lang name="en">
+    <messages name="plugin">
+      <msg name="desc_short_pmnowpayments">NOWPayments</msg>
+      <msg name="desc_full_pmnowpayments">Integration with NOWPayments</msg>
+      <msg name="price_pmnowpayments">Free</msg>
+    </messages>
+    <messages name="label_paymethod">
+      <msg name="pmnowpayments">NOWPayments</msg>
+      <msg name="module_pmnowpayments">NOWPayments</msg>
+    </messages>
+    <messages name="paymethod.edit.nowpayments">
+      <msg name="api_key">API key</msg>
+      <msg name="hint_api_key">The API key can be obtained in the settings of NOWPayments account</msg>
+      <msg name="email">Email</msg>
+      <msg name="hint_email">NOWPayments account email</msg>
+      <msg name="password">Password</msg>
+      <msg name="hint_password">NOWPayments account password</msg>
+      <msg name="test">Sandbox mode</msg>
+      <msg name="hint_test">Enables sandbox API for testing</msg>
+    </messages>
+    <messages name="msgerror">
+      <msg name="msg_error_api_down">This payment gateway is currently down. Please try creating this paymethod at a later time.</msg>
+      <msg name="msg_error_wrong_email_form">Invalid Email format. There must be a sequence of the form_name@domain_name..</msg>
+      <msg name="msg_error_invalid_api_key">API key is invalid. Check the correctness of the entered data.</msg>
+      <msg name="msg_error_invalid_auth">Invalid authorization data. Check the correctness of the entered data.</msg>
+      <msg name="msg_error_invalid_api_auth">This API key may not belong to the specified user. Check the correctness of the entered data.</msg>
+      <msg name="msg_error_missed_currency">Failed to retrieve the currency</msg>
+      <msg name="msg_error_payment_fraud">NOWPayments considered the payment fraudulent.</msg>
+      <msg name="msg_error_no_url_provided">NOWPayments did not return invoice link.</msg>
+      <msg name="msg_error_no_payment_id_provided">NOWPayments did not return the invoice id.</msg>
+      <msg name="msg_error_status_rejected">NOWPayments rejected the payment.</msg>
+      <msg name="msg_error_repeat_again">NOWPayments api is currently unavailable. Try again later.</msg>
+      <msg name="msg_error_generic_error">An error has occurred.</msg>
+      <msg name="msg_error_unknown_error">An unknown error has occurred.</msg>
+      <msg name="msg_error_json_parsing_error">NOWPayments returned an incorrect response.</msg>
+      <msg name="msg_error_too_small_min_amount">The minimum payment amount cannot be less than 5 dollars.</msg>
+    </messages>
+  </lang>
+
+  <lang name="ru">
+    <messages name="plugin">
+      <msg name="desc_short_pmnowpayments">NOWPayments</msg>
+      <msg name="desc_full_pmnowpayments">Интеграция с NOWPayments</msg>
+      <msg name="price_pmnowpayments">Бесплатно</msg>
+    </messages>
+    <messages name="label_paymethod">
+      <msg name="pmnowpayments">NOWPayments</msg>
+      <msg name="module_pmnowpayments">NOWPayments</msg>
+    </messages>
+    <messages name="paymethod.edit.nowpayments">
+      <msg name="api_key">API-ключ</msg>
+      <msg name="hint_api_key">API-ключ может быть получен в настройках аккаунта NOWPayments</msg>
+      <msg name="email">Электронная почта</msg>
+      <msg name="hint_email">Электронная почта аккаунта NOWPayments</msg>
+      <msg name="password">Пароль</msg>
+      <msg name="hint_password">Пароль аккаунта NOWPayments</msg>
+      <msg name="test">Тестовый режим</msg>
+      <msg name="hint_test">Активирует тестовый режим NOWPayments</msg>
+    </messages>
+    <messages name="msgerror">
+      <msg name="msg_error_api_down">К сожалению, этот платёжный шлюз сейчас недоступен. Попробуйте создать метод оплаты в другое время.</msg>
+      <msg name="msg_error_wrong_email_form">Неверный формат электронной почты. Должна быть последовательность вида имя_ящика@доменное_имя.</msg>
+      <msg name="msg_error_invalid_api_key">Неверный API-ключ. Проверьте правильность введенных данных.</msg>
+      <msg name="msg_error_invalid_auth">Неверные данные для авторизации. Проверьте правильность введенных данных.</msg>
+      <msg name="msg_error_invalid_api_auth">Неверные данные для авторизации. Проверьте правильность введенных данных.</msg>
+      <msg name="msg_error_missed_currency">Не удалось получить валюту.</msg>
+      <msg name="msg_error_payment_fraud">NOWPayments сочёл платеж мошенническим.</msg>
+      <msg name="msg_error_no_url_provided">NOWPayments не вернул ссылку на счет.</msg>
+      <msg name="msg_error_no_payment_id_provided">NOWPayments не вернул id платежа.</msg>
+      <msg name="msg_error_status_rejected">NOWPayments отклонил платеж.</msg>
+      <msg name="msg_error_repeat_again">NOWPayments API в настоящее время недоступен. Попробуйте позже.</msg>
+      <msg name="msg_error_generic_error">Произошла ошибка.</msg>
+      <msg name="msg_error_unknown_error">Произошла неизвестная ошибка.</msg>
+      <msg name="msg_error_json_parsing_error">NOWPayments вернул некорректный ответ.</msg>
+      <msg name="msg_error_too_small_min_amount">Минимальная сумма платежа не может быть меньше 5 долларов.</msg>
+    </messages>
+  </lang>
+</mgrdata>
