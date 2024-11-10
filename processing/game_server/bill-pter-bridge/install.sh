@@ -8,7 +8,7 @@ ExitError() {
 }
 
 InstallDeps() {
-	PKGS="billmanager-plugin-python-libs python3-pip"
+	PKGS="billmanager-plugin-python-libs python3-pip make"
 	Info "Install dependencies: ${PKGS}"
 	PkgInstall "${PKGS}" || ExitError "Install dependencies failed"
 }
