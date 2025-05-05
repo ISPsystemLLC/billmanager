@@ -72,7 +72,7 @@ class NOWPaymentsPaymentCgi(PaymentCgi):
                     description=description,
                     success_url=(f"https://{os.environ['HTTP_HOST']}/mancgi/nowpaymentsresult"
                                  f"?elid={self.payment_params['id']}"),
-                    cancel_url=(f"https: // {os.environ['HTTP_HOST']} / mancgi / nowpaymentsresult"
+                    cancel_url=(f"https://{os.environ['HTTP_HOST']}/mancgi/nowpaymentsresult"
                                 f"?elid={self.payment_params['id']}")
                 )
             except Exception as e:
