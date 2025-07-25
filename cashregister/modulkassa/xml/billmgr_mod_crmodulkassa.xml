@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mgrdata>
+  <plugin name="crmodulkassa">
+    <group>payment_cash_register</group>
+    <author>BILLmanager team</author>
+    <params>
+      <priority lang="ru">9999</priority>
+      <priority lang="en">0</priority>
+    </params>
+  </plugin>
+  <metadata name="payment_cash_register.edit.crmodulkassa" type="form">
+    <form>
+      <page name="page_settings">
+        <field name="url">
+          <input name="url" type="text" check="url" required="yes"/>
+        </field>
+        <field name="username">
+          <input name="username" type="text" required="yes"/>
+        </field>
+        <field name="password">
+          <input name="password" type="password" required="yes"/>
+        </field>
+        <field name="retailpointid">
+          <input name="retailpointid" type="text" required="yes"/>
+        </field>
+        <field name="payment_receipt_description">
+          <input name="payment_receipt_description" type="text" maxlength="64" required="yes"/>
+        </field>
+        <field name="convert_invalid_rate_to_none_rate">
+          <input name="convert_invalid_rate_to_none_rate" type="checkbox"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
+  <lang name="ru">
+    <messages name="plugin">
+      <msg name="desc_short_crmodulkassa">Модулькасса</msg>
+      <msg name="desc_full_crmodulkassa">Интеграция с Модулькассой</msg>
+      <msg name="price_crmodulkassa">Бесплатно</msg>
+    </messages>
+    <messages name="payment_cash_register.include">
+      <msg name="crmodulkassa">Модулькасса</msg>
+      <msg name="module_crmodulkassa">Модулькасса</msg>
+    </messages>
+    <messages name="payment_cash_register.edit.crmodulkassa">
+      <msg name="url">API URL</msg>
+      <msg name="hint_url">Указывается тестовый или боевой API</msg>
+      <msg name="username">Логин</msg>
+      <msg name="hint_username">Логин для доступа к Модулькассе, можно найти в личном кабинете</msg>
+      <msg name="password">Пароль</msg>
+      <msg name="hint_password">Пароль для доступа к Модулькассе, можно найти в личном кабинете</msg>
+      <msg name="retailpointid">ID точки продаж</msg>
+      <msg name="hint_retailpointid">ID точки продаж, можно найти в личном кабинете</msg>
+      <msg name="payment_receipt_description">Наименование услуги</msg>
+      <msg name="hint_payment_receipt_description">Наименование услуги при авансовом платеже</msg>
+      <msg name="convert_invalid_rate_to_none_rate">Отправка чеков с нестандартной ставкой</msg>
+      <msg name="hint_convert_invalid_rate_to_none_rate">Чеки, у которых в биллинге указана нестандартная ставка, будут отправлятся со ставкой БЕЗ НДС</msg>
+    </messages>
+    <messages name="msgerror">
+      <msg name="msg_error_unknown_error">Произошла неизвестная ошибка</msg>
+      <msg name="msg_error_failed_associate">Авторизационные данные не созданы, причина: __reason__</msg>
+      <msg name="msg_error_service_unavailable">Сервис фискализации не готов к работе, причина: __reason__</msg>
+    </messages>
+  </lang>
+  <lang name="en">
+    <messages name="plugin">
+      <msg name="desc_short_crmodulkassa">Modulkassa</msg>
+      <msg name="desc_full_crmodulkassa">Integration with Modulkassa</msg>
+      <msg name="price_crmodulkassa">Free</msg>
+    </messages>
+  </lang>
+</mgrdata>
