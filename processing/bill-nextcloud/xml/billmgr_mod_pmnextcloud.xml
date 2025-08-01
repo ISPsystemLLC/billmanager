@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mgrdata>
+	<plugin name="pmnextcloud">
+		<group>processing_module</group>
+		<author>BILLmanager team</author>
+		<params>
+			<priority lang="ru">3700</priority>
+			<priority lang="en">1800</priority>
+			<type name="backupservice"/>
+		</params>
+	</plugin>
+
+	<metadata name="processing.edit.pmnextcloud" type="form">
+		<form>
+			<page name="methodprops">
+				<field name="base_url">
+					<input type="text" name="base_url" private="yes" required="yes" check="url"/>
+				</field>
+				<field name="nc_username">
+					<input type="text" name="nc_username" private="yes" required="yes"/>
+				</field>
+				<field name="nc_password">
+					<input type="text" name="nc_password" private="yes" required="yes"/>
+				</field>
+			</page>
+		</form>
+	</metadata>
+
+
+	<metadata name="pricelist.pmnextcloud" type="form">
+		<form>
+			<field name="usergroup">
+				<select name="usergroup"/>
+			</field>
+		</form>
+	</metadata>
+
+    <lang name="ru">
+		<messages name="plugin">
+			<msg name="desc_short_pmnextcloud">Nextcloud</msg>
+			<msg name="desc_full_pmnextcloud">Интеграция с Nextcloud</msg>
+			<msg name="price_pmnextcloud">Бесплатно</msg>
+		</messages>
+		<messages name="label_processing_modules">
+			<msg name="pmnextcloud">Nextcloud</msg>
+			<msg name="module_pmnextcloud">Nextcloud</msg>
+		</messages>
+		<messages name="pricelist.pmnextcloud">
+			<msg name="usergroup">Группа пользователя</msg>
+			<msg name="hint_usergroup">Группа, которая будет назначена аккаунту пользователя при его создании в Nextcloud</msg>
+		</messages>
+		<messages name="processing.edit.pmnextcloud">
+			<msg name="base_url">URL</msg>
+			<msg name="nc_username">Имя пользователя</msg>
+			<msg name="nc_password">Пароль</msg>
+			<msg name="hint_base_url">Ссылка на главную страницу панели Nextcloud, например https://my.panel.example</msg>
+			<msg name="hint_nc_username">Имя пользователя в Nextcloud</msg>
+			<msg name="hint_nc_password">Пароль приложения, генерируется в Nextcloud</msg>
+			<msg name="placeholder_base_url">https://my.panel.example</msg>
+		</messages>
+		<messages name="msgerror">
+			<msg name="msg_error_wrong_panel_info">Введены неверные данные панели или панель недоступна.</msg>
+			<msg name="msg_error_close_error">Не удалось закрыть аккаунт в панели Nextcloud/ownCloud.</msg>
+			<msg name="msg_error_open_error">Не удалось создать аккаунт в панели Nextcloud/ownCloud.</msg>
+			<msg name="msg_error_open_colission_error">Аккаунт с таким именем пользователя уже существует в панели Nextcloud/ownCloud.</msg>
+			<msg name="msg_error_resume_error">Не удалось включить аккаунт в панели Nextcloud/ownCloud.</msg>
+			<msg name="msg_error_suspend_error">Не удалось выключить аккаунт в панели Nextcloud/ownCloud.</msg>
+			<msg name="msg_error_set_param_error">Не удалось изменить параметры аккаунт в панели Nextcloud/ownCloud.</msg>
+		</messages>
+	</lang>
+</mgrdata>

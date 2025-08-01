@@ -1,0 +1,6 @@
+**/__pycache__
+test.py
+.env
+.venv
+.pytest_cache
+venv-nextcloud
