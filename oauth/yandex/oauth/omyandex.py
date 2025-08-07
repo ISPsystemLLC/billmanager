@@ -15,8 +15,8 @@ import requests
 logging.init_logging('omyandex')
 logger = logging.get_logger('omyandex')
 
-CLIENT_ID = "aa3ff0e96f7e4bfbad2965d5beaf37fd"
-CLIENT_SECRET = "5580fb48fc674928bfd3b21e6e57b5de"
+CLIENT_ID = ""
+CLIENT_SECRET = ""
 
 mod = Module()
 

@@ -11,29 +11,54 @@
 
 ## Стркутура модуля
 
-1. С++ плагин, где регистрируется наследник `project::MethodOAuth`.
-Конструктор `project::MethodOAuth` принимает intname метода авторизации.
-Базовый плагин состоит из
-- cpp файлов, которые собираются в динамическую библиотеку
-- xml файла, где подключается библиотека и определяются сообщения для нового метода авторизации
-
+1. XML с описанием плагина метадатой и сообщениями для метода авторизации `xml/billmgr_mod_omyandex.xml`.
+Секция `plugin` содержит внутреннее наименование метода авторизации, а также группу плагина - `oauth`
+на основе этой секции происходит регистрация метода авторизации
 ```
-src/oauth_yandex.cpp
-xml/billmgr_mod_yandex.xml
+  <plugin name="yandex">
+    <group>oauth</group>
+  </plugin>
+```
+Метадата в XML соджержит
+- Поля для настройки метода авторизации на форме провайдера
+```
+  <metadata name="project.edit" type="form" mgr="billmgr">
+    <form>
+      <page name="auth">
+        <field name="auth_method_yandex" after="custom_methods">
+          <input type="toggle" name="auth_method_yandex"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
+```
+- Поля для натсрйоки метода авторизации на форме параметров пользователя
+```
+  <metadata name="usrparam" type="form">
+    <form>
+      <page name="socnetwork">
+        <field name="yandex_status">
+          <input type="checkbox" name="yandex_status">
+            <if value="on" hide="yandex_signup"/>
+            <if value="off" hide="yandex_status"/>
+          </input>
+        </field>
+        <field name="yandex_signup">
+          <link name="yandex_signup_link" target="_self" referrer="yes"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
 ```
 
-2. Скрипт на python, который реализует две команды
+2. Скрипт на python `oauth/omyandex.py`, который реализует две команды
  - `make_url` - формирует url, куда необходимо перенаправить клиента при авторизации через новый метода
- - `get_user_data` - формирует информацию о пользователе, которую получает на основе временного кода.
-Обязательные параметры пользователя, которые ожидает BILLmanager: firstname, lastname, realname, email, id (из внешней системы)
+ - `get_user_data` - формирует информацию о пользователе, которую получает на основе временного кода
+Обязательные параметры пользователя, которые ожидает BILLmanager: firstname, lastname, realname, email, id (из внешней системы). 
+Важно, скрипт должен начинаться с `om` остальная часть должна совпадать с внутренним наименованием метода авторизации в XML
+При установке `.py` опускается. 
 
-Важно, скрипт должен начинаться с `om` остальная часть должна совпадать с intname метода авторизации
-При установке `.py` опускается
-```
-oauth/omyandex.py
-```
-
-3. Иконки для метода авторизации, в качестве имени используется intname метода авторизации
+3. Иконки для метода авторизации, в качестве имени используется внутреннее наименование метода авторизации в XML
 ```
 dist/skins/common/img/yandex.svg
 dist/skins/dragon/default/yandex.svg
@@ -68,11 +93,3 @@ https://domain.com/billmgr?func=oauth.save.userdata&network=yandex
     deb-based OS:`make debian-prepare`
     redhat-based: `make centos-prepare`
 4. Устанавливаем модуль `make install`
-
-## Дополнительно
-
-Для удобной разработки C++ плагинов можно сипользовать clangd
-Это позволит ходить по зависимостям и использовать статический анализатор для нахождения ошибок
-1. Устанавливаем `clangd`
-2. Создаем `compile_commands.json` при помощи `./gen_compile_commands.py`
-3. Используем любое расширение для работы с clangd в вашей IDE
