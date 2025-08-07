@@ -1,0 +1,5 @@
+.cache
+.build
+lib
+external
+compile_commands.json

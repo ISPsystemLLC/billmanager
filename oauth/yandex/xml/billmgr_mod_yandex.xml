@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mgrdata>
+
+  <library name="libyoauthyandex"/>
+
+  <metadata name="project.edit" type="form" mgr="billmgr">
+    <form>
+      <page name="auth">
+        <field name="auth_method_yandex" after="custom_methods">
+          <input type="toggle" name="auth_method_yandex"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
+
+  <lang name="ru">
+    <messages name="project_auth">
+      <msg name="auth_method_yandex">Яндекс</msg>
+    </messages>
+    <messages name="label_socnet">
+      <msg name="yandex">Яндекс</msg>
+    </messages>
+  </lang>
+
+</mgrdata>
