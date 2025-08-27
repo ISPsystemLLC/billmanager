@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mgrdata>
+
+  <plugin name="yandex">
+    <group>oauth</group>
+  </plugin>
+
+  <metadata name="project.edit" type="form" mgr="billmgr">
+    <form>
+      <page name="auth">
+        <field name="auth_method_yandex" after="custom_methods">
+          <input type="toggle" name="auth_method_yandex"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
+
+  <metadata name="usrparam" type="form">
+    <form>
+      <page name="socnetwork">
+        <field name="yandex_status">
+          <input type="checkbox" name="yandex_status">
+            <if value="on" hide="yandex_signup"/>
+            <if value="off" hide="yandex_status"/>
+          </input>
+        </field>
+        <field name="yandex_signup">
+          <link name="yandex_signup_link" target="_self" referrer="yes"/>
+        </field>
+      </page>
+    </form>
+  </metadata>
+
+  <lang name="ru">
+    <messages name="project_auth">
+      <msg name="auth_method_yandex">Яндекс ID</msg>
+    </messages>
+    <messages name="label_socnet">
+      <msg name="yandex">Яндекс ID</msg>
+    </messages>
+    <messages name="usrparam">
+      <msg name="yandex">Яндекс ID</msg>
+      <msg name="yandex_signup_link">Привязать к Яндекс ID</msg>
+      <msg name="yandex_status">Статус по привязке к Яндекс ID</msg>
+      <msg name="hint_yandex_status">Привязать данный аккаунт к аккаунту Яндекс ID. Чтобы отвязать, необходимо снять галочку и сохранить форму</msg>
+    </messages>
+  </lang>
+
+</mgrdata>
