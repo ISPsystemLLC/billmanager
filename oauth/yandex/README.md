@@ -92,11 +92,11 @@ CLIENT_ID и CLIENT_SECRET приложения нужно прописать в
 1. Установите необходимые dev-пакеты:
    - Для Debian-подобных ОС:
      ```
-     apt install coremanager-dev billmanager-dev billmanager-plugin-python-libs
+     apt install coremanager-dev billmanager-corporate-dev billmanager-plugin-python-libs
      ```
    - Для RedHat-подобных ОС:
      ```
-     yum install coremanager-devel billmanager-devel billmanager-plugin-python-libs
+     yum install coremanager-devel billmanager-corporate-devel billmanager-plugin-python-libs
      ```
 
 2. Разместите исходники модуля по пути `/usr/local/mgr5/src/`.
