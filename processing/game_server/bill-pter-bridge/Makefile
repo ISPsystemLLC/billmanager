@@ -12,7 +12,11 @@ install:
 	. $(CURDIR)/pter-venv/bin/activate
 	pip3 install -r $(CURDIR)/requirements.txt
 	#bash gen script for running module
-	echo -e '#!/bin/bash\n . ${CURDIR}/pter-venv/bin/activate\n python ${CURDIR}/pmpterodactyl.py "$$@"' > $(CURDIR)/pmpterodactyl
+	cat > $(CURDIR)/pmpterodactyl << EOF
+	#!/bin/bash
+		. ${CURDIR}/pter-venv/bin/activate
+		python ${CURDIR}/pmpterodactyl.py "\$$@"
+	EOF
 	# logo
 	cp ./assets/billmanager-plugin-pmpterodactyl.png  $(LOGO_DIR)
 	# xml
